@@ -1,0 +1,19 @@
+type User {
+  id: ID! @unique
+  email: String! @unique
+  name: String!
+  password: String!
+  movieLists: [MovieList!]!
+}
+
+type MovieList {
+  id: ID! @unique
+  title: String!
+  author: User!
+  movies: [Movie!]!
+}
+
+type Movie {
+  id: ID! @unique
+  title: String!
+}

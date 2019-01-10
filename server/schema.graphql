@@ -1,0 +1,48 @@
+type Query {
+  user(userId: ID!): User
+  #users: [User!]! #DELETE
+  isLoggedIn: Boolean!
+  movieList(listId: ID!): MovieList
+  #movieLists: [MovieList!]! #DELETE
+  movie(movieId: ID!): Movie
+  movies: [Movie!]!
+}
+
+type Mutation {
+  # User Creact Delete
+  signUp(email: String!, password: String!, name: String!): String!
+  logIn(email: String!, password: String!): String!
+  logOut(id: ID!): User!
+  deleteUser(userId: ID!): User
+  # Movie List Creact Update Delete
+  createMovieList(title: String!, userId: ID!): MovieList!
+  updateMovieList(listId: ID!, newTitle: String): MovieList
+  deleteMovieList(listId: ID!): MovieList
+  # Movie Creact Update Delete
+  createMovie(title: String!): Movie!
+  updateMovie(movieId: ID!, newTitle: String): Movie
+  deleteMovie(movieId: ID!): Movie
+  # Movie List and Movie related
+  addMovieToList(listId: ID!, movieId: ID!): MovieList!
+  removeMovieFromList(listId: ID!, movieId: ID!): MovieList!
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
+  password: String!
+  movieLists: [MovieList!]!
+}
+
+type MovieList {
+  id: ID!
+  title: String!
+  author: User!
+  movies: [Movie!]!
+}
+
+type Movie {
+  id: ID!
+  title: String!
+}
